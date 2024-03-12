@@ -1,0 +1,28 @@
+function quickSortArrayBack(arr){
+    var i = 6;
+    var pivot = 9;
+    var j = arr.length - 1;
+
+    while(j !== pivot){
+        if(arr[i] >= arr[pivot] && arr[j] <= arr[pivot]){
+            temp = arr[j]
+            arr[j]=arr[i];
+            arr[i]= temp;
+
+            j--;
+            i++;
+        }else{
+            if(arr[i] < arr[pivot]){
+                i++;
+            }
+            if(arr[j] > arr[pivot]){
+                j--;
+            } 
+        }
+    }
+    return arr;
+}
+
+function partition(arr){
+    
+}

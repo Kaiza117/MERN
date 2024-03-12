@@ -1,0 +1,41 @@
+class Ninja {
+    constructor(name,health,speed = 3,strength = 3){
+        this.name = name;
+        this.health = health;
+        this.speed = speed;
+        this.strength = strength;
+    }
+    sayHi(){
+        return `Hello ${this.name}!`
+    }
+    showStats(){
+        return `Name: ${this.name} Health ${this.health} Strength ${this.strength}, Speed ${this.speed}`
+    }
+    drinkSake(){
+        this.health += 10;
+        return `WE LOVE DRINKINGG!!!!! health is up by 10: Health ${this.health}`
+    }
+}
+
+const ninja1 = new Ninja("GOAT",100,25,10);
+// console.log(ninja1.sayHi())
+// console.log(ninja1.drinkSake())
+
+class SuperSensei extends Ninja {
+    constructor(name,health,speed,strength,wisdom){
+        super(name,health,speed,strength,wisdom = 10)
+        this.name = name;
+        this.health = health;
+        this.speed = speed;
+        this.speed = strength;
+        this.wisdom = wisdom;
+    }
+    speakWisdom(){
+        super.drinkSake()
+        return `When in doubt, Look intelligent`;
+    }
+}
+
+const SuperSensei1 = new SuperSensei("Sun Tzu",200,10,10)
+console.log(SuperSensei1.speakWisdom())
+console.log(SuperSensei1.showStats())
