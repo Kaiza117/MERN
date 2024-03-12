@@ -1,0 +1,77 @@
+class Card{
+    constructor(name, cost){
+        this.name = name;
+        this.cost = cost;
+    }
+}
+
+class Units extends Card{
+    constructor(name, cost, power, hp){
+        super(name, cost);
+        this.power = power;
+        this.hp = hp;
+    }
+    attack(target){
+        target.hp -= this.power
+        return `Hit Target for ${this.power}!`
+    }
+}
+
+class Effects extends Card{
+    constructor(name, cost, text, stat, magnitude){
+        super(name, cost);
+        this.text = text;
+        this.stat = stat;
+        this.magnitude = magnitude;
+    }
+    play( target ) {
+            if( target instanceof Units ) {
+                if (this.stat == 'hp'){
+                    target.hp += this.magnitude
+                    return this.text
+                }
+                else if (this.stat == 'power'){
+                    target.power += this.magnitude
+                    return this.text
+                }
+            } 
+            else {
+                throw new Error( "Target must be a unit!" );
+            }
+        }
+}
+
+// const HardAlgo = new Effects("Hard Algorithm", 2, "Increase target's resilience by 3", 'hp' , 3)
+// const UPR = new Effects("Unhandled Promise Rejection", 1, "Reduce target's resilience by 2", 'hp' , -2)
+// const PP = new Effects("Pair Programming", 3, "Increase target's power by 2", 'power', 2)
+
+// const Red = new Units("Redbelt Ninja", 3, 3, 4)
+// const Black = new Units("Blackbelt Ninja", 4, 5, 4)
+
+// SCENARIO
+
+// Turn 1
+const Red = new Units("Redbelt Ninja", 3, 3, 4)
+const HardAlgo = new Effects("Hard Algorithm", 2, "Increase target's hp by 3", 'hp' , 3)
+console.log("Turn 1")
+console.log(Red)
+console.log(HardAlgo.play(Red))
+console.log(Red)
+
+// Turn 2
+const Black = new Units("Blackbelt Ninja", 4, 5, 4)
+const UPR = new Effects("Unhandled Promise Rejection", 1, "Reduce target's hp by 2", 'hp' , -2)
+console.log("Turn 2")
+console.log(Black)
+console.log(UPR.play(Red))
+console.log(Red)
+
+
+// Turn 3
+const PP = new Effects("Pair Programming", 3, "Increase target's power by 2", 'power', 2)
+console.log("Turn 3")
+console.log(Red)
+console.log(PP.play(Red))
+console.log(Red)
+console.log(Red.attack(Black))
+console.log(Black)
