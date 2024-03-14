@@ -1,28 +1,35 @@
-function quickSortArrayBack(arr){
-    var i = 6;
-    var pivot = 9;
-    var j = arr.length - 1;
-
-    while(j !== pivot){
-        if(arr[i] >= arr[pivot] && arr[j] <= arr[pivot]){
-            temp = arr[j]
-            arr[j]=arr[i];
-            arr[i]= temp;
-
-            j--;
+function partition(arr){
+    var i = 0
+    var j = arr.length - 1
+    var pivot = Math.floor(Math.random() * arr.length);
+    if(arr[i] >= arr[pivot] && arr[j] <= arr[pivot]){
+        temp = arr[j]
+        arr[j] = arr[i];
+        arr[i] = temp;
+    }
+    else if (arr[i] == arr[j]) {
+        return j
+    }
+    else {
+        if(arr[i] < arr[pivot]){
             i++;
-        }else{
-            if(arr[i] < arr[pivot]){
-                i++;
-            }
-            if(arr[j] > arr[pivot]){
-                j--;
-            } 
+        }
+        if(arr[j] > arr[pivot]){
+            j--;
+        } 
+    }
+}
+
+const quickSort = (arr) => {
+    let pivot = arr[0];
+    let leftArr = [];
+    let rightArr = [];
+    for (let i = 1; i < arr.length; i++) {
+        if (arr[i] < pivot) {
+        leftArr.push(arr[i]);
+        } else {
+        rightArr.push(arr[i]);
         }
     }
-    return arr;
-}
-
-function partition(arr){
-    
-}
+    return [...quickSort(leftArr), pivot, ...quickSort(rightArr)];
+    };
